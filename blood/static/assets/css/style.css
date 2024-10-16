@@ -1,12 +1,7 @@
-/*
-Theme Name: Blad Ai - Blood Donation HTML5 Template
-Author: SparkRaxx
-Author URI: https://themeforest.net/user/sparkraxx/portfolio
-Tags: 
-Description: Cartmate - Blad Ai - Blood Donation HTML5 Template
-Version: 1.0.0
-*/
-/********** base css ***********/
+
+
+
+
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&amp;display=swap");
 
 :root {
@@ -1373,9 +1368,9 @@ header .header_top .header_top_content a {
   -ms-flex-align: center;
   align-items: center;
   color: var(--secondary-color);
-  gap: 6px;
+  gap: 10px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   padding: 38px 0;
   -webkit-transition: var(--transition_base);
   -o-transition: var(--transition_base);
@@ -1437,53 +1432,6 @@ header .header_top .header_top_content a {
 .header_bottom .header_search_menu .offcanvas_btn {
   padding-right: 0px;
   border: 0;
-}
-
-.dropdown_search .search-btn {
-  border: none;
-  background: none;
-}
-
-.dropdown_search .dropdown-menu {
-  position: absolute;
-  inset: 0px 0px auto auto;
-  margin: 0px;
-  -webkit-transform: translate(0px, 40px) !important;
-  -ms-transform: translate(0px, 40px) !important;
-  transform: translate(0px, 40px) !important;
-}
-
-.dropdown_search .dropdown-menu .search-form {
-  min-width: 320px;
-  padding: 0 12px;
-}
-
-.dropdown_search .dropdown-menu .search-form input {
-  border: 1px solid var(--gray);
-  width: 100%;
-  outline: 0;
-  padding: 11px 20px;
-  font-weight: 300;
-}
-
-.dropdown_search .dropdown-menu .search-form .submit-btn {
-  width: 55px;
-  height: 53px;
-  background-color: var(--primary-color);
-  color: white;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  -webkit-transition: var(--transition-base);
-  -o-transition: var(--transition-base);
-  transition: var(--transition-base);
-  border: none;
-  -webkit-transition: var(--transition_base);
-  -o-transition: var(--transition_base);
-  transition: var(--transition_base);
-}
-
-.dropdown_search .dropdown-menu .search-form .submit-btn:hover {
-  background: var(--secondary-color);
 }
 
 .header_toggle_btn {
@@ -1860,14 +1808,17 @@ header .header_top .header_top_content a {
   z-index: 1;
   font-weight: 500;
   font-size: 18px;
+  border-radius: 10px;
 }
 
 .red_btn:hover {
   color: white;
+  border-radius: 10px;
 }
 
 .red_btn:hover::before {
   width: 100%;
+  border-radius: 10px;
 }
 
 .red_btn::before {
@@ -1882,6 +1833,7 @@ header .header_top .header_top_content a {
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
+  border-radius: 10px;
 }
 
 .black_btn {
@@ -1899,10 +1851,12 @@ header .header_top .header_top_content a {
   position: relative;
   z-index: 1;
   font-weight: 500;
+  border-radius: 10px;
 }
 
 .black_btn:hover::before {
   width: 100%;
+  border-radius: 10px;
 }
 
 .black_btn::before {
@@ -1917,6 +1871,7 @@ header .header_top .header_top_content a {
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
+  border-radius: 10px;
 }
 
 /**************about__section**********/
@@ -3279,64 +3234,7 @@ footer .footer_bottom p {
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
-}
-
-.register {
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 40px 35px;
-  gap: 15px;
-}
-
-.register .register_content h4 {
-  color: white;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.register .register_content p {
-  color: white;
-  max-width: 395px;
-  width: 100%;
-}
-
-.register .register_icon i {
-  color: white;
-  font-size: 35px;
-  -webkit-transition: var(--transition_base);
-  -o-transition: var(--transition_base);
-  transition: var(--transition_base);
-}
-
-.red_hover i:hover {
-  color: var(--primary-color);
-}
-
-.black_hover i:hover {
-  color: var(--secondary-color);
-}
-
-.register_top {
-  margin-top: -205px;
-  margin-bottom: 115px;
-  z-index: 22;
-  position: relative;
-}
-
-@media (max-width: 991px) {
-  .register_top {
-    margin-top: 0;
-    margin-bottom: 50px;
-  }
+ 
 }
 
 .help_wrap .help_over {
@@ -4222,18 +4120,9 @@ footer .footer_bottom p {
   padding: 240px 0;
 }
 
-.hm2_hero.hm21 {
-  background: url("../images/hm2.jpg") no-repeat;
-}
 
-.hm2_hero.hm22 {
-  background: url("../images/hm1.png") no-repeat;
-}
 
-.hm2_hero.hm23 {
-  background: url("../images/hm3.jpg") no-repeat;
-}
-
+/*carousel section start */
 .hm2_hero::before {
   content: "";
   position: absolute;
@@ -4269,9 +4158,45 @@ footer .footer_bottom p {
   }
 }
 
+.hm_bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Full viewport height */
+}
+
+@media (max-width: 768px) {
+  .hm_bg {
+    background-size: cover;  
+    background-position: center center; 
+    height: auto; 
+    padding: 50px 0; /* Adjust padding for mobile */
+  }
+
+  .hm2_content h2 {
+    font-size: 24px; /* Smaller font size for mobile */
+  }
+
+  .hm2_content h4 {
+    font-size: 16px; /* Adjust heading size */
+  }
+
+  .hm2_content .explore_now {
+    padding: 10px 20px; /* Smaller button padding */
+    font-size: 14px;
+  }
+}
+
+
+
 .hm2_content a {
   margin: 5px 5px;
 }
+
+
+
+
+
 
 .hm1_hero_slider .slick-slide.slick-active .hm2_content h4 {
   -webkit-animation: 1.7s theme_fadeInUp;
@@ -6164,3 +6089,76 @@ footer .footer_bottom p {
 .nice-select:focus {
   border: 1px solid var(--primary-color);
 }
+
+
+
+
+
+
+
+
+
+
+/* Start Blood Search */
+.home-blood-search {
+  margin-top: 50px;
+}
+
+.home-blood-search .shadow-box {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Red border for inputs and select dropdowns */
+.home-blood-search .border-red {
+  border: 2px solid #dc3545;
+}
+
+.home-blood-search .border-red:focus {
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* Red focus shadow */
+}
+
+/* Red search button */
+.home-blood-search .search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.home-blood-search .search-btn i {
+  margin-right: 5px;
+}
+
+.home-blood-search .search-btn:hover {
+  background-color: #bb2d3b;
+  border-color: #bb2d3b;
+}
+
+/* Red heading */
+.home-blood-search h2 {
+  color: #dc3545; /* Red for the heading */
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .home-blood-search h2 {
+    font-size: 1.5rem;
+  }
+
+  .home-blood-search .search-btn {
+    width: 100%; /* Full-width button on mobile */
+  }
+}
+/* End Blood Search */
+
+
+
+
+
+
+
