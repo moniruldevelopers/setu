@@ -41,12 +41,12 @@
         <div class="row align-items-center position-relative">
           <div class="col-xl-2 col-lg-2 col-md-4 col-6">
             <div class="header_logo">
-              <a href="index-2.html"><img  src="{% static 'assets/logo/logo.png' %}" alt="images not founds" class="img-fluid"></a>
+              <a href="{% url 'home' %}"><img  src="{% static 'assets/logo/logo.png' %}" alt="images not founds" class="img-fluid"></a>
             </div>
           </div>
           <div class="col-xl-7 col-lg-8 d-none d-xxl-block d-xl-block">
             <ul class="main_menu">
-              <li><a href="contact.html">Home</a></li>
+              <li><a href="{% url 'home' %}">Home</a></li>
               <li><a href="contact.html">Search Blood</a></li>
               
               <li><a href="about.html">About Us</a></li>
@@ -61,15 +61,39 @@
               <li><a href="contact.html">Gallery</a></li>
             </ul>
           </div>
-          <div class="col-xl-3 col-lg-2  d-none d-xxl-block d-xl-block">
-            <div class="header_search_menu d-flex">            
-              <div>
-                <a href="#" class="red_btn get_code">Account</a>
-              </div>
-
+          <div class="col-xl-3 col-lg-2 d-none d-xxl-block d-xl-block">
+            <div class="header_search_menu d-flex">
+                {% if request.user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn red_btn get_code dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ request.user.username }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="">
+                                    <i class="fas fa-user-edit"></i> Update Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'change_password' %}">
+                                    <i class="fas fa-key"></i> Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div>
+                        <a href="{% url 'login' %}" class="red_btn get_code">Account</a>
+                    </div>
+                {% endif %}
             </div>
-          </div>
-
+        </div>
+        
           <!-- mobile menu bar -->
           <div class="col-lg-10 col-md-8 col-6 d-block d-xxl-none d-xl-none">
             <div class="d-flex align-items-center gap-2 justify-content-end">

@@ -22,17 +22,20 @@
   <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/fancybox.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 
 <body>
+
   <!--preloader start-->
-  <div class="preloader">
+  <!-- <div class="preloader">
     <h4>UGV BLOOD BANK</h4>
     <div class="preload-progress">
       <span></span>
     </div>
-  </div>
+  </div> -->
   <!--preloader end-->
 
 
@@ -46,61 +49,90 @@
 
 
 {% include 'header.html' %}
+{% include 'message.html' %}
 {% block content %}
 
 
 {% endblock content %}
     
 
-  <!-- mobile menu offcanvas -->
+<!-- mobile menu offcanvas -->
 <div class="offcanvas offcanvas-start" id="offcanvas-mobile">
-<div class="offcanvas-body">
-    <div class="mobile-menu">
-    <a href="index-2.html" class="logo py-3"><img src="{% static 'assets/logo/logo.png' %}" alt="logo"
-        class="img-fluid"></a>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  <div class="offcanvas-body">
+      <div class="mobile-menu">
+          <a href="{% url 'home' %}" class="logo py-3">
+              <img src="{% static 'assets/logo/logo.png' %}" alt="logo" width="250" height="70" class="img-fluid">
+          </a>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" style="background-color: red; border: none;"></button> <!-- Set background color to red -->
 
-    <ul class="accordion accordion-flush mobile_dropdown" id="accordionFlushExample">
-       
-        <li class="accordion-item">
-        <h2><a href="about.html">Home</a></h2>
-        </li>
-        <li class="accordion-item">
-          <h2><a href="about.html">Search Blood</a></h2>
-        </li>
-        <li class="accordion-item">
-          <h2><a href="about.html">About Us</a></h2>
-        </li>
-        
-        <li class="accordion-item">
-        <h2>
-            <button class="accordion-button collapsed p-3" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapsethree" aria-expanded="false">
-            Blog
-            </button>
-        </h2>
-        <div id="flush-collapsethree" class="accordion-collapse collapse">
-            <div class="accordion-body">
-            <ul>
-                <li><a href="blog-default.html">Blog</a></li>
-                
-            </ul>
+          <ul class="accordion accordion-flush mobile_dropdown" id="accordionFlushExample">
+              <li class="accordion-item">
+                  <h2><a href="{% url 'home' %}">Home</a></h2>
+              </li>
+              <li class="accordion-item">
+                  <h2><a href="about.html">Search Blood</a></h2>
+              </li>
+              <li class="accordion-item">
+                  <h2><a href="about.html">About Us</a></h2>
+              </li>
+              <li class="accordion-item">
+                  <h2>
+                      <button class="accordion-button collapsed p-3" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsethree" aria-expanded="false">
+                          Blog
+                      </button>
+                  </h2>
+                  <div id="flush-collapsethree" class="accordion-collapse collapse">
+                      <div class="accordion-body">
+                          <ul>
+                              <li><a href="blog-default.html">Blog</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </li>
+              <li class="accordion-item">
+                  <h2><a href="contact.html">Contact</a></h2>
+              </li>
+              <li class="accordion-item">
+                  <h2><a href="contact.html">Gallery</a></h2>
+              </li>
+          </ul>
+      </div>
+     
+        <div class="header_search_menu d-flex">
+            {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                <a href="#" class="red_btn get_code dropdown-toggle" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ request.user.username }} 
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                    <li>
+                        <a class="dropdown-item" href="">
+                            <i class="fas fa-user-edit"></i> Update Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'change_password' %}">
+                            <i class="fas fa-lock"></i> Change Password
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{% url 'logout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
             </div>
+            {% else %}
+            <div>
+                <a href="{% url 'login' %}" class="red_btn get_code">Account</a>
+            </div>
+            {% endif %}
         </div>
-        </li>
-        <li class="accordion-item">
-        <h2><a href="contact.html">Contact</a></h2>
-        </li>
-        <li class="accordion-item">
-          <h2><a href="contact.html">Gallery</a></h2>
-          </li>
-    </ul>
-    </div>
-    <div>
-      <a href="#" class="red_btn get_code ">Account</a>
-    </div>
+ 
+    
+  </div>
 </div>
-</div>
+
 
 
 

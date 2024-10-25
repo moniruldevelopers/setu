@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fm7u4lgj43ps^1un193-moeeisd@99_t2g7k$t=fnsfo$#tcyr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #my apps
     'blood',
+    'authportal',
     # third-party apps
     'django_cleanup.apps.CleanupConfig',
     'crispy_forms',
@@ -92,18 +93,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+
 ]
 
 
@@ -117,6 +107,29 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+
+
+
+# email settings 
+#password reset
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'monirul.developers@gmail.com'
+EMAIL_HOST_PASSWORD = 'sinb qplh nymq hkfc'  
+
+
+# Authentication
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Set email verification to mandatory
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ACCOUNT_EMAIL_CONFIRMATION_HTML = 'confirm-email.html'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+
 
 
 # Static files (CSS, JavaScript, Images)

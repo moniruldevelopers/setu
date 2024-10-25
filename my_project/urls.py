@@ -6,7 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blood.urls')),  # Include the 'sms.urls' module
+    path('', include('blood.urls')), 
+    path('', include('authportal.urls')), 
     
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),#debug false hole 
