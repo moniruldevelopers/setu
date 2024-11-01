@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 from .models import DonorProfile
 
 class DonorProfileForm(forms.ModelForm):
@@ -13,3 +14,12 @@ class DonorProfileForm(forms.ModelForm):
             'profile_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'availability': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+    def clean_last_donation_date(self):
+        last_donation_date = self.cleaned_data.get('last_donation_date')
+        today = timezone.now().date()
+
+        if last_donation_date and last_donation_date > today:
+            raise forms.ValidationError("You cannot select a date in the future for the last donation date. Today is allowed.")
+
+        return last_donation_date
