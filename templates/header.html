@@ -79,8 +79,8 @@
                           
                           </li>
                             <li>
-                                <a class="dropdown-item" href="{% url 'update_profile' %}">
-                                    <i class="fas fa-user-edit"></i> Update Profile
+                                <a class="dropdown-item" href="{% url 'manage_profile' %}">
+                                    <i class="fas fa-user-edit"></i> Manage Profile
                                 </a>
                             </li>
                             <li>
@@ -172,16 +172,25 @@
                     {{ request.user.username }} 
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                    <li>
-                        <a class="dropdown-item" href="">
-                            <i class="fas fa-user-edit"></i> Update Profile
-                        </a>
-                    </li>
+                
+                  <li>                  
+                    <a class="dropdown-item" href="{% url 'my_details' %}">
+                      <i class="fas fa-info-circle"></i> My Details
+                  </a>
+                </li>
+
+                  <li>
+                    <a class="dropdown-item" href="{% url 'manage_profile' %}">
+                      <i class="fas fa-user-edit"></i> Manage Profile
+                  </a>
+                  </li> 
+
                     <li>
                         <a class="dropdown-item" href="{% url 'change_password' %}">
                             <i class="fas fa-lock"></i> Change Password
                         </a>
                     </li>
+                    
                     <li>
                         <a class="dropdown-item" href="{% url 'logout' %}">
                             <i class="fas fa-sign-out-alt"></i> Logout

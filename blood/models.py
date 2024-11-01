@@ -30,3 +30,6 @@ class DonorProfile(models.Model):
     permanent_address = models.TextField(max_length=400, blank=True, null=True)
     last_donation_date = models.DateField(blank=True, null=True)
     availability = models.BooleanField(default=True)  # To indicate if they are available for donation
+
+    def __str__(self):
+        return f'{self.full_name} ({self.blood_group})'
