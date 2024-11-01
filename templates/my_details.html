@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% load date_extras %}
+{% block content %}
+<div class="container mb-2 ">
+    <h3 class="text-center mb-1">My Profile Details</h3>
+    <div class="card border-0 shadow-sm" style="max-width: 400px; margin: auto; background: #f9f9f9;">
+        <div class="card-body text-center p-4">
+            <div class="mb-3">
+                {% if profile.profile_picture %}
+                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-rectangle shadow-sm" style="width: 100px; height: 100px;">
+                {% else %}
+                    <img src="{% static 'default_profile.jpg' %}" alt="Profile Picture" class="rounded-rectangle shadow-sm" style="width: 100px; height: 100px;">
+                {% endif %}
+            </div>
+            <h5 class="card-title text-dark font-weight-bold">{{ profile.full_name }}</h5>
+            <p class="text-muted mb-1"><strong>Gender:</strong> {{ profile.gender }}</p>
+            <p class="text-muted mb-1"><strong>Blood Group:</strong> {{ profile.blood_group }}</p>
+            <p class="text-muted mb-1"><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+            <p class="text-muted mb-1"><strong>Phone Number:</strong> <span class="copyable">{{ profile.phone_number }}</span></p>
+            <p class="text-muted mb-1"><strong>Present Address:</strong> {{ profile.present_address }}</p>
+            <p class="text-muted mb-1"><strong>Permanent Address:</strong> {{ profile.permanent_address|default:"N/A" }}</p>
+            <p class="text-muted mb-1"><strong>Last Donation Date:</strong> {{ profile.last_donation_date|default:"N/A" }}</p>
+
+            {% if profile.last_donation_date %}
+                {% with profile.last_donation_date|days_since as days_info %}
+                    <p class="text-muted mb-1">
+                        <strong>Time Since Last Donation:</strong> 
+                        <span class="{{ days_info.1 }}">{{ days_info.0 }}</span>
+                    </p>
+                {% endwith %}
+            {% endif %}
+
+            <p class="text-muted mb-1"><strong>Availability:</strong> {{ profile.availability|yesno:"Available,Not Available" }}</p>
+            <a href="{% url 'update_profile' %}" class="btn btn-outline-primary mt-3">Edit Profile</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .copyable {
+        cursor: pointer;
+        color: #007bff;
+        text-decoration: underline;
+    }
+
+    .copyable:hover {
+        color: #0056b3;
+    }
+
+    .card {
+        border-radius: 15px; /* Rounded corners */
+    }
+
+    .card-body {
+        border-radius: 15px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* Light inner shadow for read effect */
+    }
+</style>
+
+<script>
+    document.querySelector('.copyable').addEventListener('click', function() {
+        const phoneNumber = this.textContent;
+        navigator.clipboard.writeText(phoneNumber).then(() => {
+            alert('Phone number copied to clipboard: ' + phoneNumber);
+        }).catch(err => {
+            console.error('Error copying text: ', err);
+        });
+    });
+</script>
+{% endblock %}

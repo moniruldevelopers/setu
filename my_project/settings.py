@@ -1,4 +1,5 @@
 import os
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,12 +41,10 @@ INSTALLED_APPS = [
 SILENCED_SYSTEM_CHECKS = ["ckeditor.W001"]
 
 
-
-
 # pip install crispy-bootstrap5
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap"
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
