@@ -5,6 +5,9 @@ urlpatterns = [
     path('',home, name='home'),
     path('manage-profile/', manage_profile, name='manage_profile'),
     path('profile/', my_details, name='my_details'),
+    path('donors/', donor_list, name='donor_list'),
+
+
     
 
 ]
