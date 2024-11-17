@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -57,20 +58,26 @@ def my_details(request):
 
 
 
-
 def donor_list(request):
     # Get filter parameters
     blood_group = request.GET.get('blood_group', '')
     location = request.GET.get('location', '')
 
-    # Filter donors based on search criteria
-    donors = DonorProfile.objects.all()
+    # Filter available donors first (only those with availability=True)
+    donors = DonorProfile.objects.filter(availability=True)
 
+    # Apply additional filters based on blood group and location
     if blood_group:
         donors = donors.filter(blood_group=blood_group)
 
     if location:
         donors = donors.filter(present_address__icontains=location)
+
+    # Calculate the date 4 months ago
+    four_months_ago = datetime.now().date() - timedelta(days=4 * 30)  # Roughly 4 months (30 days each)
+
+    # Filter donors who last donated at least 4 months ago
+    donors = donors.filter(last_donation_date__lte=four_months_ago)
 
     # Order the donors to avoid warning
     donors = donors.order_by('full_name')
@@ -97,7 +104,6 @@ def donor_list(request):
     }
 
     return render(request, 'donor_list.html', context)
-
 
 
 
