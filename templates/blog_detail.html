@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ blog.title }}
+{% endblock title %}
+
+{% block content %}
+<!-- blog details section start -->
+<div class="blog__details__section ">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-xl-8">
+                <div class="km_blog__main">
+                    <div class="blog__img mb-30">
+                        <img src="{{ blog.image.url }}" alt="images not founds" class="img-fluid">
+                    </div>
+                    <ul class="fc-list mb-30">
+                        <li>
+                            <i class="fa-regular fa-clock"></i>
+                            <span>{{ blog.date }}</span>
+                        </li>
+                        <li><a href="{% url 'blog_category' category.id %}">
+                            
+                            <span><i class="fa-solid fa-tag"></i> {{ category.name }}</span>
+                        </a>
+                        </li>
+                    </ul>
+                    <div class="km__blog_content">
+                        <h2 class="mb-30">{{ blog.title }}</h2>
+                        <p class="mb-30">{{ blog.description }}</p>            
+                    </div>        
+                </div>
+            </div>
+
+            <div class="col-xl-4">
+                <div class="km__blog__sidebar">
+                    <div class="bl-sidebar-widget bl-category-widget mt-60">
+                        <h5 class="widget-title mb-3">Categories</h5>
+                        <ul class="bl-ct-list">
+                            {% for category in all_categories %}
+                            <li>
+                                <a href="{% url 'blog_category' category.id %}">
+                                    <span class="me-2"><i class="fa-solid fa-arrow-right"></i></span> 
+                                    {{ category.name }}
+                                    ({{ category.blogs.count }})
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="bl__sidebar__widget mb-60">
+                        <a href="{% url 'blog_list' %}" class="btn btn-primary">Back to Blog List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- blog details section ends -->
+{% endblock %}

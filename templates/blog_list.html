@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+All Blogs
+{% endblock title %}
+    
+{% block content %}
+<!-- Our News Section -->
+<section class="news gray_bg ">
+    <div class="container">
+        <!-- Search Bar -->
+        <div class="row">
+            <div class="col-12">
+                <form method="get" class="d-flex justify-content-center mb-2 mt-3">
+                    <input type="text" name="search" value="{{ search_query }}" placeholder="Search blogs..." class="form-control w-50" />
+                    <button type="submit" class="btn btn-danger ms-2">Search</button>
+                    {% if search_query %}
+                    <a href="{% url 'blog_list' %}" class="btn btn-secondary ms-2">Clear Search</a>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <!-- Total Blogs -->
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center">Total Blogs: {{ total_blogs }}</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            {% for blog in blogs %}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-1">
+                <div class="news_content_item">
+                    <div class="news_img">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                        <a href="{{ blog.image.url }}" data-fancybox=""><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                    <div class="news_content">
+                        <div class="meta d-flex gap-4">
+                            <span><i class="fa-regular fa-clock"></i> {{ blog.date }}</span>
+                            <span>
+                                <i class="fa-solid fa-tag"></i> 
+                                <a href="{% url 'blog_category' blog.category.id %}">{{ blog.category.name }}</a>
+                            </span>
+                        </div>
+                        <a href="{% url 'blog_detail' blog.id %}">
+                            <h5>{{ blog.title }}</h5>
+                        </a>
+                        <p>{{ blog.description|truncatewords:20 }}</p>
+                        <a href="{% url 'blog_detail' blog.id %}">Read More <i class="fa-solid fa-angles-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No blogs available.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if blogs.paginator.num_pages > 1 %}
+        <div class="col-12 mt-2 mb-2">
+            <nav aria-label="Page navigation" class="text-center">
+                <!-- Previous Button -->
+                {% if blogs.has_previous %}
+                <a class="btn btn-sm btn-outline-danger me-2" href="?page={{ blogs.previous_page_number }}&search={{ search_query }}">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </a>
+                {% else %}
+                <button class="btn btn-sm btn-outline-secondary me-2" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                {% endif %}
+
+                <!-- Current Page / Total Pages -->
+                <span class="btn btn-sm btn-outline-dark disabled">
+                    Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}
+                </span>
+
+                <!-- Next Button -->
+                {% if blogs.has_next %}
+                <a class="btn btn-sm btn-outline-danger ms-2" href="?page={{ blogs.next_page_number }}&search={{ search_query }}">
+                    Next <i class="fas fa-chevron-right"></i>
+                </a>
+                {% else %}
+                <button class="btn btn-sm btn-outline-secondary ms-2" disabled>
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

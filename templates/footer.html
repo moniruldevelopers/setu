@@ -1,4 +1,5 @@
 {% load static %}
+
   <!-- footer section start -->
   <footer>
     <div class="footer_top pt-115">
@@ -7,10 +8,17 @@
           <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
             <div class="footer_content">
               <h5>About Us</h5>          
-              <ul>
-                <li><span>Phone:</span> +880 1764982388</li>
-                <li><span>Email:</span> ugvblood@gmail.com</li>
-              </ul>
+              <ul class="list-unstyled">
+                {% if site_info.phone %}
+                    <li><span>Phone:</span> {{ site_info.phone }}</li>
+                {% endif %}
+                {% if site_info.email %}
+                    <li><span>Email:</span> {{ site_info.email }}</li>
+                {% endif %}
+                {% if site_info.address %}
+                    <li><span>Address:</span> {{ site_info.address }}</li>
+                {% endif %}
+            </ul>
             </div>
           </div>
           <div class="col-xl-2 col-lg-2 col-md-6 col-6 mb-4">
@@ -85,7 +93,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-            <p>Copyright &copy; 2020 UGV BLOOD BANK. All rights reserved</p>
+            <p>Copyright &copy; 2020 {{ site_info.site_name}}. All rights reserved</p>
           </div>
         </div>
       </div>

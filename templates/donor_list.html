@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-
 <div class="container">
     <!-- Centered Title -->
     <h4 class="text-center text-danger mb-4">Blood Donor List</h4>
@@ -33,7 +31,7 @@
         </div>
     </form>
 
-    <!-- Responsive Table -->
+    <!-- Responsive Table with Horizontal Scroll -->
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead style="background-color: #dc3545; color: white;">
@@ -43,7 +41,7 @@
                     <th>Last Donation (Days Ago)</th>
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>Gender</th> <!-- New column for gender -->
+                    <th>Gender</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +58,7 @@
                     </td>
                     <td>{{ donor.phone_number }}</td>
                     <td>{{ donor.present_address }}</td>
-                    <td>{{ donor.get_gender_display }}</td> <!-- Display gender -->
+                    <td>{{ donor.get_gender_display }}</td>
                 </tr>
                 {% empty %}
                 <tr>
@@ -73,42 +71,37 @@
         </table>
     </div>
 
-   <!-- Pagination -->
-   {% if donors.paginator.num_pages > 1 %}
-   <nav aria-label="Page navigation" class="text-center mt-1 mb-3">
-       <!-- Previous Button -->
-       {% if donors.has_previous %}
-       <a class="btn btn-sm btn-outline-danger me-2" href="?page={{ donors.previous_page_number }}&blood_group={{ request.GET.blood_group }}&location={{ request.GET.location }}">
-           <i class="fas fa-chevron-left"></i> Previous
-       </a>
-       {% else %}
-       <button class="btn btn-sm btn-outline-secondary me-2" disabled>
-           <i class="fas fa-chevron-left"></i> Previous
-       </button>
-       {% endif %}
-   
-       <!-- Current Page / Total Pages -->
-       <span class="btn btn-sm btn-outline-dark disabled">
-           Page {{ donors.number }} of {{ donors.paginator.num_pages }}
-       </span>
-   
-       <!-- Next Button -->
-       {% if donors.has_next %}
-       <a class="btn btn-sm btn-outline-danger ms-2" href="?page={{ donors.next_page_number }}&blood_group={{ request.GET.blood_group }}&location={{ request.GET.location }}">
-           Next <i class="fas fa-chevron-right"></i>
-       </a>
-       {% else %}
-       <button class="btn btn-sm btn-outline-secondary ms-2" disabled>
-           Next <i class="fas fa-chevron-right"></i>
-       </button>
-       {% endif %}
-   </nav>
-   {% endif %}
-   
-   
+    <!-- Pagination -->
+    {% if donors.paginator.num_pages > 1 %}
+    <nav aria-label="Page navigation" class="text-center mt-1 mb-3">
+        <!-- Previous Button -->
+        {% if donors.has_previous %}
+        <a class="btn btn-sm btn-outline-danger me-2" href="?page={{ donors.previous_page_number }}&blood_group={{ request.GET.blood_group }}&location={{ request.GET.location }}">
+            <i class="fas fa-chevron-left"></i> Previous
+        </a>
+        {% else %}
+        <button class="btn btn-sm btn-outline-secondary me-2" disabled>
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        {% endif %}
 
+        <!-- Current Page / Total Pages -->
+        <span class="btn btn-sm btn-outline-dark disabled">
+            Page {{ donors.number }} of {{ donors.paginator.num_pages }}
+        </span>
 
-
+        <!-- Next Button -->
+        {% if donors.has_next %}
+        <a class="btn btn-sm btn-outline-danger ms-2" href="?page={{ donors.next_page_number }}&blood_group={{ request.GET.blood_group }}&location={{ request.GET.location }}">
+            Next <i class="fas fa-chevron-right"></i>
+        </a>
+        {% else %}
+        <button class="btn btn-sm btn-outline-secondary ms-2" disabled>
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+        {% endif %}
+    </nav>
+    {% endif %}
 </div>
 
 <!-- Enable/Disable Search Button -->
@@ -120,9 +113,15 @@
     });
 </script>
 
-<!-- Mobile Responsiveness -->
+<!-- Additional Styles for Table Responsiveness -->
 <style>
-    /* Make table text smaller and responsive on mobile */
+    /* Force horizontal scrolling for the table on smaller devices */
+    .table-responsive {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Ensure consistent padding and text size on small screens */
     @media (max-width: 768px) {
         table {
             font-size: 12px;
@@ -134,10 +133,10 @@
 
     @media (max-width: 576px) {
         table {
-            font-size: 10px;
+            font-size: 16px;
         }
         th, td {
-            padding: 0.3rem;
+            padding: 0.1rem;
         }
     }
 </style>

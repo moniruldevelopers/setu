@@ -1,61 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    
+UGV BLOOD BANK - University Of Global Village Barishal
 {% endblock title %}
 
 {% block content %}
 <!-- hero section start -->
 <section class="hm1_hero_slider hm2_hero_slider">
-  <!-- First Slide -->
-  <div class="hm2_hero hm21 hm_bg" style="background: url('/static/assets/images/hm2.jpg') no-repeat center center; background-size: cover; width: 100%;">
-
+  {% for slide in sliders %}
+  <div class="hm2_hero hm_bg" style="background: url('{{ slide.image.url }}') no-repeat center center; background-size: cover; width: 100%;">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-9 col-lg-9 col-md-11 col-12">
           <div class="hm2_content text-center">
-            <h4>Donate to blood contribute</h4>
-            <h2>Your Blood Can Bring Smile In Any One Person's Face</h2>
-            <a href="donate.html" class="explore_now red_btn">Register Now</a>
-            <a href="contact.html" class="explore_now red_btn">Find Blood</a>
+            <h4>{{ slide.short_text_1 }}</h4>
+            <h2>{{ slide.short_text_2 }}</h2>
+            <a href="{% url 'login' %}" class="explore_now red_btn">Register Now</a>
+            <a href="{% url 'donor_list' %}" class="explore_now red_btn">Find Blood</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Second Slide -->
-  <div class="hm2_hero hm22 hm_bg" style="background: url('/static/assets/images/hm1.png') no-repeat center center; background-size: cover;width: 100%;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-9 col-lg-9 col-md-11 col-12">
-          <div class="hm2_content text-center">
-            <h4>Donate to blood contribute</h4>
-            <h2>Your Blood Can Bring Smile In Any One Person's Face</h2>
-            <a href="donate.html" class="explore_now red_btn">Register Now</a>
-            <a href="contact.html" class="explore_now red_btn">Find Blood</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Third Slide -->
-  <div class="hm2_hero hm23 hm_bg" style="background: url('/static/assets/images/hm3.jpg') no-repeat center center; background-size: cover;width: 100%;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-9 col-lg-9 col-md-11 col-12">
-          <div class="hm2_content text-center">
-            <h4>Donate to blood contribute</h4>
-            <h2>Your Blood Can Bring Smile In Any One Person's Face</h2>
-            <a href="donate.html" class="explore_now red_btn">Register Now</a>
-            <a href="contact.html" class="explore_now black_btn">Find Blood</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </section>
+
 
   <!-- Home Blood Search Section -->
 {% comment %} <div class="container home-blood-search  mb-5">
@@ -105,81 +74,46 @@
 
 
 <!--our news start -->
-<section class="news gray ptb-115">
+<section class="news gray pt-3 pb-5">
   <div class="container">
-    <div class="row mb-5">
+    <div class="row mb-3">
       <div class="col-12">
-        <div class="common_title text-center">
-          <p>our news</p>
+        <div class="common_title text-center">      
           <h2>Checkout News & Updates</h2>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
+      {% for blog in blogs %}
       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 mb-xl-0 mb-lg-0">
         <div class="news_content_item">
-          <div class="news_img ">
-            <img src="{% static 'assets/images/n1.jpg' %}" alt="">
-            <a href="blog-details.html"><i class="fa-solid fa-plus"></i></a>
+          <div class="news_img">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+            <a href="{% url 'blog_detail' blog.id %}"><i class="fa-solid fa-plus"></i></a>
           </div>
           <div class="news_content">
             <div class="meta d-flex gap-4">
-              <span><i class="fa-regular fa-clock"></i> 18 Feb, 2022</span>
-              
+              <span><i class="fa-regular fa-clock"></i> {{ blog.date }}</span>
+              <span><i class="fa-solid fa-tag"></i> {{ blog.category.name }}</span>
             </div>
-            <a href="blog-details.html">
-              <h5>Donation is hope for poor helpless children</h5>
+            <a href="{% url 'blog_detail' blog.id %}">
+              <h5>{{ blog.title }}</h5>
             </a>
-            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, magni eos
-              qui ratione voluptatem</p>
-            <a href="blog-details.html">Read More <i class="fa-solid fa-angles-right"></i></a>
+            <p>{{ blog.description|truncatewords:20 }}</p>
+            <a href="{% url 'blog_detail' blog.id %}">Read More <i class="fa-solid fa-angles-right"></i></a>
           </div>
         </div>
       </div>
-      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 mb-xl-0 mb-lg-0">
-        <div class="news_content_item">
-          <div class="news_img ">
-            <img src="{% static 'assets/images/n2.jpg' %}" alt="">
-            <a href="blog-details.html"><i class="fa-solid fa-plus"></i></a>
-          </div>
-          <div class="news_content">
-            <div class="meta d-flex gap-4">
-              <span><i class="fa-regular fa-clock"></i> 18 Feb, 2022</span>
-              
-            </div>
-            <a href="blog-details.html">
-              <h5>Donation is hope for poor helpless children</h5>
-            </a>
-            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, magni eos
-              qui ratione voluptatem</p>
-            <a href="blog-details.html">Read More <i class="fa-solid fa-angles-right"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-        <div class="news_content_item">
-          <div class="news_img ">
-            <img src="{% static 'assets/images/n3.jpg' %}" alt="">
-            <a href="blog-details.html"><i class="fa-solid fa-plus"></i></a>
-          </div>
-          <div class="news_content">
-            <div class="meta d-flex gap-4">
-              <span><i class="fa-regular fa-clock"></i> 18 Feb, 2022</span>
-              
-            </div>
-            <a href="blog-details.html">
-              <h5>Donation is hope for poor helpless children</h5>
-            </a>
-            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, magni eos
-              qui ratione voluptatem</p>
-            <a href="blog-details.html">Read More <i class="fa-solid fa-angles-right"></i></a>
-          </div>
-        </div>
-      </div>
+      {% empty %}
+      <p>No blogs available.</p>
+      {% endfor %}
     </div>
   </div>
 </section>
 <!--our news end -->
+
+
+
 
   <!-- gallery start -->
   <section class="gallery ptb-115 ">

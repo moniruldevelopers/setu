@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Gallery
+{% endblock title %}
+
+{% block content %}
+
+<!-- gallery start -->
+<section class="gallery3 ptb-115">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="common_title text-center">
+          <p>Gallery</p>
+          <h2>Our Best Campaign Gallery</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      {% for image in page_obj %}
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-4">
+        <div class="gallary_item">
+          <img src="{{ image.image.url }}" alt="{{ image.title }}">
+          <a href="{{ image.image.url }}" data-fancybox="gallery"><i class="fa-solid fa-plus"></i></a>
+        </div>
+      </div>
+      {% empty %}
+      <p>No images available.</p>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <div class="row">
+        <div class="col-12 text-center">
+          {% if page_obj.has_previous %}
+            <a class="btn btn-sm btn-outline-danger" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          {% endif %}
+          
+          <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+          
+          {% if page_obj.has_next %}
+            <a class="btn btn-sm btn-outline-danger" href="?page={{ page_obj.next_page_number }}">Next</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- gallery end -->
+
+{% endblock content %}

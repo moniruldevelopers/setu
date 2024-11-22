@@ -10,29 +10,29 @@
           <div class="col-xl-3 col-lg-3">
             <div class="header_top_content">
               <span><i class="fa-solid fa-phone"></i></span>
-              <a href="tel:01977259912">+880 1764982388</a>
+              <a href="tel:{{ site_info.phone }}">{{ site_info.phone }}</a>
             </div>
           </div>
           <div class="col-xl-3 col-lg-3">
             <div class="header_top_content">
               <span><i class="fa-solid fa-envelope"></i></span>
-              <a href="mailto:ugvblood@gmail.com">ugvblood@gmail.com</a>
+              <a href="mailto:{{ site_info.email }}">{{ site_info.email }}</a>
             </div>
           </div>
           <div class="col-xl-3 col-lg-3">
             <div class="header_top_content">
               <span><i class="fa-solid fa-location-dot"></i></span>
-              <a href="#">UGV Barishal</a>
+              <a href="#">{{ site_info.address }}</a>
             </div>
           </div>
           <div class="col-xl-3 col-lg-3">
             <div class="header_top_social">
               <p>Follow Now</p>
               <ul class="d-flex">
-                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                <li><a href="{{ site_info.site_facebook }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+                <li><a href="{{ site_info.site_x }}"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href="{{ site_info.site_instagram }}"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="{{ site_info.site_pinterest }}"><i class="fa-brands fa-pinterest-p"></i></a></li>
               </ul>
             </div>
           </div>
@@ -53,15 +53,9 @@
               <li><a href="{% url 'donor_list' %}">Search Blood</a></li>
               
               <li><a href="about.html">About Us</a></li>
-        
-              <li class="position-relative">
-                <a href="javascript:void(0)">Blog <i class="fa-solid fa-angle-down"></i></a>
-                <ul class="submenu_wrapper">
-                  <li><a href="blog-default.html">Blog</a></li>                  
-                </ul>
-              </li>
+              <li><a href="{% url 'blog_list' %}">Blogs</a></li>            
               <li><a href="contact.html">Contact</a></li>
-              <li><a href="contact.html">Gallery</a></li>
+              <li><a href="{% url 'gallery' %}">Gallery</a></li>
             </ul>
           </div>
           <div class="col-xl-3 col-lg-2 d-none d-xxl-block d-xl-block">
@@ -143,19 +137,9 @@
                   <h2><a href="about.html">About Us</a></h2>
               </li>
               <li class="accordion-item">
-                  <h2>
-                      <button class="accordion-button collapsed p-3" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsethree" aria-expanded="false">
-                          Blog
-                      </button>
-                  </h2>
-                  <div id="flush-collapsethree" class="accordion-collapse collapse">
-                      <div class="accordion-body">
-                          <ul>
-                              <li><a href="blog-default.html">Blog</a></li>
-                          </ul>
-                      </div>
-                  </div>
-              </li>
+                <h2><a href="about.html">Blogs</a></h2>
+            </li>
+             
               <li class="accordion-item">
                   <h2><a href="contact.html">Contact</a></h2>
               </li>

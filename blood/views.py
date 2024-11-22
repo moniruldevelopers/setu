@@ -6,10 +6,9 @@ from django.contrib import messages
 from .models import *
 from .views import *
 from .forms import *
-
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import DonorProfile
+
 from datetime import date
 from django.db.models import Q
 
@@ -18,7 +17,15 @@ from django.db.models import Q
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    site_info = SiteInfo.objects.first()  # Get the first (and only) instance
+    sliders = Slider.objects.all().order_by('-created_at')[:5]
+    blogs = Blog.objects.all().order_by('-date')[:3]  # Show only 6 blogs on the homepage, you can adjust this
+    context = {
+        'site_info': site_info,
+        'sliders':sliders,
+        'blogs': blogs,
+    }
+    return render(request, 'home.html', context)
 
 @login_required(login_url='login')
 def manage_profile(request):
@@ -105,6 +112,82 @@ def donor_list(request):
 
     return render(request, 'donor_list.html', context)
 
+
+
+
+
+
+
+def blog_list_view(request):
+    search_query = request.GET.get('search', '')  # Get search query from the GET request
+    blogs = Blog.objects.all().order_by('-date')  # Latest blogs first
+
+    if search_query:
+        blogs = blogs.filter(title__icontains=search_query)  # Filter blogs by title using case-insensitive search
+
+    categories = Category.objects.all()
+    
+    # Pagination
+    paginator = Paginator(blogs, 3)  # Show 6 blogs per page
+    page_number = request.GET.get('page')
+    blogs_page = paginator.get_page(page_number)
+
+    total_blogs = blogs.count()  # Get the total number of blogs
+
+    context = {
+        'blogs': blogs_page,  # Paginated blogs
+        'categories': categories,
+        'total_blogs': total_blogs,  # Total blogs count
+        'search_query': search_query,  # Pass the search query to retain it in the input field
+    }
+    return render(request, 'blog_list.html', context)
+
+
+def blog_detail_view(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)  # Fetch the blog post by ID
+    category = blog.category  # Get the category of the blog post
+    category_blog_count = Blog.objects.filter(category=category).count()  # Get the number of blogs in that category
+    all_categories = Category.objects.all()[:20]  # Get all categories (limit to 20)
+
+    # Context
+    context = {
+        'blog': blog,
+        'category': category,
+        'category_blog_count': category_blog_count,
+        'all_categories': all_categories,
+    }
+    return render(request, 'blog_detail.html', context)
+
+def blog_category_view(request, category_id):
+    category = get_object_or_404(Category, id=category_id)  # Get the category
+    blogs = Blog.objects.filter(category=category).order_by('-date')  # Get blogs for that category
+    all_categories = Category.objects.all()[:20]  # Get all categories (limit to 20)
+
+    # Context
+    context = {
+        'blogs': blogs,
+        'category': category,
+        'all_categories': all_categories,
+    }
+    return render(request, 'blog_category_list.html', context)
+
+
+
+
+def gallery_view(request):
+    # Fetch all gallery images, ordered by 'id' or 'title'
+    gallery_images = Gallery.objects.all().order_by('id')  # Or use 'title' if preferred
+
+    # Set up pagination
+    paginator = Paginator(gallery_images, 1)  # Show 1 image per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+    }
+    
+    return render(request, 'gallery.html', context)
 
 
 def handler404(request, exception):

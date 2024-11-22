@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 
 class DonorProfile(models.Model):
     BLOOD_GROUP_CHOICES = [
@@ -33,3 +34,64 @@ class DonorProfile(models.Model):
 
     def __str__(self):
         return f'{self.full_name} ({self.blood_group})'
+
+
+
+
+
+class SiteInfo(models.Model):
+    site_name = models.CharField(max_length=20)
+    site_logo = models.ImageField(upload_to='logo/')
+    email = models.EmailField()
+    phone = models.CharField(max_length=14)
+    address = models.CharField(max_length=100)
+    site_facebook = models.URLField(max_length=100)
+    site_x = models.URLField(max_length=100)
+    site_instagram = models.URLField(max_length=100)
+    site_pinterest = models.URLField(max_length=100)
+
+    def __str__(self):
+        return self.site_name
+
+    def clean(self):
+        if SiteInfo.objects.exists() and not self.pk:
+            raise ValidationError("Only one SiteInfo instance is allowed.")
+
+    def save(self, *args, **kwargs):
+        self.clean()  # Call clean method before saving
+        super().save(*args, **kwargs)
+
+
+class Slider(models.Model):
+    image = models.ImageField(upload_to='sliders/')
+    short_text_1 = models.CharField(max_length=255)
+    short_text_2 = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Slider: {self.short_text_1}"
+    
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+class Blog(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    image = models.ImageField(upload_to='blog_images/')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="blogs")
+
+    def __str__(self):
+        return self.title
+    
+class Gallery(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='gallery_images/')
+
+    def __str__(self):
+        return self.title
