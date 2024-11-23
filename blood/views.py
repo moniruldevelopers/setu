@@ -14,18 +14,22 @@ from django.db.models import Q
 
 
 
-
-# Create your views here.
 def home(request):
     site_info = SiteInfo.objects.first()  # Get the first (and only) instance
     sliders = Slider.objects.all().order_by('-created_at')[:5]
-    blogs = Blog.objects.all().order_by('-date')[:3]  # Show only 6 blogs on the homepage, you can adjust this
+    blogs = Blog.objects.all().order_by('-published_at')[:3]
+    gallery_images = Gallery.objects.all().order_by('id')  # Get all gallery images
+    
     context = {
         'site_info': site_info,
-        'sliders':sliders,
+        'sliders': sliders,
         'blogs': blogs,
+        'gallery_images': gallery_images,  # Pass the gallery images
+      
     }
     return render(request, 'home.html', context)
+
+
 
 @login_required(login_url='login')
 def manage_profile(request):
@@ -113,22 +117,22 @@ def donor_list(request):
     return render(request, 'donor_list.html', context)
 
 
-
-
-
-
-
 def blog_list_view(request):
     search_query = request.GET.get('search', '')  # Get search query from the GET request
-    blogs = Blog.objects.all().order_by('-date')  # Latest blogs first
+
+    # Fetch blogs ordered by descending published_at (latest first)
+    blogs = Blog.objects.all().order_by('-published_at')
+
+    # Get the last added blog (latest blog by time)
+    last_blog = blogs.first() if blogs.exists() else None
 
     if search_query:
         blogs = blogs.filter(title__icontains=search_query)  # Filter blogs by title using case-insensitive search
 
     categories = Category.objects.all()
-    
+
     # Pagination
-    paginator = Paginator(blogs, 3)  # Show 6 blogs per page
+    paginator = Paginator(blogs, 6)  # Show 6 blogs per page
     page_number = request.GET.get('page')
     blogs_page = paginator.get_page(page_number)
 
@@ -136,11 +140,13 @@ def blog_list_view(request):
 
     context = {
         'blogs': blogs_page,  # Paginated blogs
+        'last_blog': last_blog,  # Latest blog
         'categories': categories,
         'total_blogs': total_blogs,  # Total blogs count
         'search_query': search_query,  # Pass the search query to retain it in the input field
     }
     return render(request, 'blog_list.html', context)
+
 
 
 def blog_detail_view(request, blog_id):
@@ -160,7 +166,7 @@ def blog_detail_view(request, blog_id):
 
 def blog_category_view(request, category_id):
     category = get_object_or_404(Category, id=category_id)  # Get the category
-    blogs = Blog.objects.filter(category=category).order_by('-date')  # Get blogs for that category
+    blogs = Blog.objects.filter(category=category).order_by('-published_at')  # Get blogs for that category
     all_categories = Category.objects.all()[:20]  # Get all categories (limit to 20)
 
     # Context
@@ -179,7 +185,7 @@ def gallery_view(request):
     gallery_images = Gallery.objects.all().order_by('id')  # Or use 'title' if preferred
 
     # Set up pagination
-    paginator = Paginator(gallery_images, 1)  # Show 1 image per page
+    paginator = Paginator(gallery_images, 6)  # Show 1 image per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -188,6 +194,27 @@ def gallery_view(request):
     }
     
     return render(request, 'gallery.html', context)
+
+
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the form data to the database
+            messages.success(request, 'Your message has been sent successfully!')
+            return redirect('contact')  # Redirect to the contact page after successful submission
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact.html', {'form': form})
+
+
+
+def about_view(request):
+    team_members = TeamMember.objects.all()  # Get all team members from the database
+    return render(request, 'about.html', {'team_members': team_members})
 
 
 def handler404(request, exception):

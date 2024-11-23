@@ -2,10 +2,10 @@
 
   <!-- footer section start -->
   <footer>
-    <div class="footer_top pt-115">
+    <div class="footer_top pt-3">
       <div class="container ">
         <div class="row border-bottom justify-content-center">
-          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 ">
             <div class="footer_content">
               <h5>About Us</h5>          
               <ul class="list-unstyled">
@@ -21,69 +21,29 @@
             </ul>
             </div>
           </div>
-          <div class="col-xl-2 col-lg-2 col-md-6 col-6 mb-4">
+          <div class="col-xl-2 col-lg-2 col-md-6 col-6 ">
             <div class="footer_content">
               <h5>Quick Links</h5>
               <ul>
-                <li><a href="service.html"><i class="fa-solid fa-angles-right"></i> Services</a></li>
-                <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
-                <li><a href="campaign.html"><i class="fa-solid fa-angles-right"></i> New Campaign</a></li>
-                <li><a href="blog-details.html"><i class="fa-solid fa-angles-right"></i> Latest News</a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
+                <li><a href="{% url 'donor_list' %}"><i class="fa-solid fa-angles-right"></i> Search Blood</a></li>
+                <li><a href="{% url 'about' %}"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
+                <li><a href="{% url 'signup' %}"><i class="fa-solid fa-angles-right"></i> Create Account</a></li>
+               
               </ul>
             </div>
           </div>
-          <div class="col-xl-2 col-lg-2 col-md-6 col-6 mb-4">
+          <div class="col-xl-2 col-lg-2 col-md-6 col-6 ">
             <div class="footer_content">
-              <h5>Our Services</h5>
+              <h5>Others Link</h5>
               <ul>
-                <li><a href="donate.html"><i class="fa-solid fa-angles-right"></i> Blood Donation</a></li>
-                <li><a href="#"><i class="fa-solid fa-angles-right"></i> Health Check</a></li>
-                <li><a href="donate.html"><i class="fa-solid fa-angles-right"></i> Blood Bank</a></li>
-                <li><a href="donate.html"><i class="fa-solid fa-angles-right"></i> Donate Process</a></li>
-                <li><a href="donate.html"><i class="fa-solid fa-angles-right"></i> Blood Info</a></li>
+                <li><a href="{% url 'contact' %}"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
+                <li><a href="{% url 'blog_list' %}"><i class="fa-solid fa-angles-right"></i> Blogs</a></li>
+                <li><a href="{% url 'gallery' %}"><i class="fa-solid fa-angles-right"></i> Gallery</a></li>
+       
               </ul>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="footer_content">
-              <h5>Latest News</h5>
-              <div class="footer_blog">
-                <div class="fblog_item mb-3">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <div class="fblog_img img">
-                        <a href="blog-details.html"><img src="{% static 'assets/images/f1.jpg' %}" alt=""></a>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <div class="fblog_content">
-                        <a href="blog-details.html"> A Formula For Help And Happiness</a>
-                        <span>18 February, 2022</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="fblog_item mb-3">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <div class="fblog_img img">
-                        <a href="blog-details.html"><img src="{% static 'assets/images/f2.jpg' %}" alt=""></a>
-                      </div>
-                    </div>
-                    <div class="col-8">
-                      <div class="fblog_content">
-                        <a href="blog-details.html"> Donation is hope for poor helpless children</a>
-                        <span>18 February, 2022</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from .models import DonorProfile
+from .models import *
 
 class DonorProfileForm(forms.ModelForm):
     class Meta:
@@ -23,3 +23,16 @@ class DonorProfileForm(forms.ModelForm):
             raise forms.ValidationError("You cannot select a date in the future for the last donation date. Today is allowed.")
 
         return last_donation_date
+
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}),
+            'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Subject'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Message', 'rows': 5}),
+        }

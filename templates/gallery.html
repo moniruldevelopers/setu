@@ -1,54 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Gallery
+    
 {% endblock title %}
-
+    
 {% block content %}
-
+    
 <!-- gallery start -->
-<section class="gallery3 ptb-115">
-  <div class="container">
-    <div class="row mb-5">
-      <div class="col-12">
-        <div class="common_title text-center">
-          <p>Gallery</p>
-          <h2>Our Best Campaign Gallery</h2>
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      {% for image in page_obj %}
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-4">
-        <div class="gallary_item">
-          <img src="{{ image.image.url }}" alt="{{ image.title }}">
-          <a href="{{ image.image.url }}" data-fancybox="gallery"><i class="fa-solid fa-plus"></i></a>
-        </div>
-      </div>
-      {% empty %}
-      <p>No images available.</p>
-      {% endfor %}
-    </div>
-
-    <!-- Pagination -->
-    <div class="pagination">
+<section class="gallery pt-2">
+    <div class="container">
       <div class="row">
-        <div class="col-12 text-center">
-          {% if page_obj.has_previous %}
-            <a class="btn btn-sm btn-outline-danger" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-          {% endif %}
-          
-          <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-          
-          {% if page_obj.has_next %}
-            <a class="btn btn-sm btn-outline-danger" href="?page={{ page_obj.next_page_number }}">Next</a>
-          {% endif %}
+        <div class="col-12 mb-5">
+          <div class="common_title text-center">     
+            <h2>Our Best Campaign Gallery</h2>
+          </div>
         </div>
+  
+        <div class="gallary_slider slider-spacing custom_dots">
+          <!-- Loop through the paginated gallery images -->
+          {% for image in page_obj %}
+          <div class="gallary_item">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}" style="height: 250px;">
+            <a href="{{ image.image.url }}" data-fancybox="gallery"><i class="fa-solid fa-plus"></i></a>
+          </div>
+          {% empty %}
+          <p>No images available.</p>
+          {% endfor %}
+        </div>
+  
+        <!-- Pagination (Next and Previous buttons only) -->
+        <!-- Pagination -->
+        {% if page_obj.paginator.num_pages > 1 %}
+        <div class="col-12 mt-2 mb-2">
+             <nav aria-label="Page navigation" class="text-center">
+                 <!-- Previous Button -->
+                 {% if page_obj.has_previous %}
+                 <a class="btn btn-sm btn-outline-danger me-2" href="?page={{ page_obj.previous_page_number }}">
+                     <i class="fas fa-chevron-left"></i> Previous
+                 </a>
+                 {% else %}
+                 <button class="btn btn-sm btn-outline-secondary me-2" disabled>
+                     <i class="fas fa-chevron-left"></i> Previous
+                 </button>
+                 {% endif %}
+
+                 <!-- Current Page / Total Pages -->
+                 <span class="btn btn-sm btn-outline-dark disabled">
+                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                 </span>
+
+                 <!-- Next Button -->
+                 {% if page_obj.has_next %}
+                 <a class="btn btn-sm btn-outline-danger ms-2" href="?page={{ page_obj.next_page_number }}">
+                     Next <i class="fas fa-chevron-right"></i>
+                 </a>
+                 {% else %}
+                 <button class="btn btn-sm btn-outline-secondary ms-2" disabled>
+                     Next <i class="fas fa-chevron-right"></i>
+                 </button>
+                 {% endif %}
+             </nav>
+         </div>
+         {% endif %}
+  
       </div>
     </div>
-
-  </div>
 </section>
 <!-- gallery end -->
-
+  
 {% endblock content %}

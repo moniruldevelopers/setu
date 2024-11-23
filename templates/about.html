@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About UGV Blood Bank
+{% endblock title %}
+
+{% block content %}
+<!-- About Section -->
+<section class="about-section py-5">
+    <div class="container">
+        <!-- UGV Blood Bank Intro Text -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4">About UGV Blood Bank</h2>
+                <p class="lead text-muted">
+                    UGV Blood Bank is dedicated to saving lives by providing safe and timely blood donations. We are committed to serving the community by ensuring a reliable supply of blood for patients in need.
+                    Our team works tirelessly to manage blood donations, organize drives, and make sure that no one is ever without the life-saving resource they need.
+                    Our goal is to provide help and hope to those in need, 24/7.
+                </p>
+                <p class="lead text-muted">
+                    Our mission is to ensure that blood is always available for those who need it, especially in critical situations. Together, we make a difference by providing a vital resource.
+                </p>
+            </div>
+        </div>
+
+        <!-- Team Members Section -->
+        <h3 class="text-center mb-4">Meet Our Team</h3>
+        <div class="row">
+            {% for member in team_members %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg border-0 rounded-3">
+                    <img src="{{ member.image.url }}" alt="{{ member.name }}" class="card-img-top" style="height: 300px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ member.name }}</h5>
+                        <p class="card-text"><strong>ID:</strong> {{ member.member_id }}</p>
+                        <p class="card-text"><strong>Phone:</strong> {{ member.phone_number }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

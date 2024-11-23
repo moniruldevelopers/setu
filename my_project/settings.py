@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fm7u4lgj43ps^1un193-moeeisd@99_t2g7k$t=fnsfo$#tcyr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -117,8 +117,8 @@ USE_TZ = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'monirul.developers@gmail.com'
-EMAIL_HOST_PASSWORD = 'sinb qplh nymq hkfc'  
+EMAIL_HOST_USER = 'pythonlearn.site@gmail.com'
+EMAIL_HOST_PASSWORD = 'sthv okue tsyg azbu'  
 
 
 # Authentication

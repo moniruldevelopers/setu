@@ -82,7 +82,7 @@ class Category(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    date = models.DateField(auto_now_add=True)
+    published_at = models.DateField(auto_now_add=True)
     image = models.ImageField(upload_to='blog_images/')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="blogs")
 
@@ -95,3 +95,28 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)  # Automatically set the timestamp when the form is submitted
+
+    def __str__(self):
+        return f"Message from {self.name} ({self.subject})"
+    
+
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    member_id = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=15)
+    image = models.ImageField(upload_to='team_members/')
+    bio = models.TextField(blank=True, null=True)  # Optional field for a bio or description of the team member
+
+    def __str__(self):
+        return self.name

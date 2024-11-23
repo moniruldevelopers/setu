@@ -52,9 +52,9 @@
               <li><a href="{% url 'home' %}">Home</a></li>
               <li><a href="{% url 'donor_list' %}">Search Blood</a></li>
               
-              <li><a href="about.html">About Us</a></li>
+              <li><a href="{% url 'about' %}">About Us</a></li>
               <li><a href="{% url 'blog_list' %}">Blogs</a></li>            
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
               <li><a href="{% url 'gallery' %}">Gallery</a></li>
             </ul>
           </div>
@@ -134,17 +134,17 @@
                   <h2><a href="{% url 'donor_list' %}">Search Blood</a></h2>
               </li>
               <li class="accordion-item">
-                  <h2><a href="about.html">About Us</a></h2>
+                  <h2><a href="{% url 'about' %}">About Us</a></h2>
               </li>
               <li class="accordion-item">
-                <h2><a href="about.html">Blogs</a></h2>
+                <h2><a href="{% url 'blog_list' %}">Blogs</a></h2>
             </li>
              
               <li class="accordion-item">
-                  <h2><a href="contact.html">Contact</a></h2>
+                  <h2><a href="{% url 'contact' %}">Contact</a></h2>
               </li>
               <li class="accordion-item">
-                  <h2><a href="contact.html">Gallery</a></h2>
+                  <h2><a href="{% url 'gallery' %}">Gallery</a></h2>
               </li>
           </ul>
       </div>

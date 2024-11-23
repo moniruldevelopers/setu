@@ -10,8 +10,8 @@ urlpatterns = [
     path('blog/<int:blog_id>/', blog_detail_view, name='blog_detail'),
     path('category/<int:category_id>/', blog_category_view, name='blog_category'),
     path('gallery/', gallery_view, name='gallery'),
-
-
+    path('contact/', contact_view, name='contact'),
+    path('about/', about_view, name='about'),  
     
 
 ]

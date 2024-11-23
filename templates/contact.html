@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    
+{% endblock title %}
+    
+{% block content %}
+    
+<section class="contact-section py-1">
+    <div class="container">
+        <h2 class="text-center mb-2">Contact Us</h2>
+        <p class="text-center text-muted mb-2">
+            Feel free to reach out to us by filling out the form below.
+        </p>
+
+        {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0 rounded-3">
+                    <div class="card-body p-4">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}  <!-- This will render the form fields -->
+                            <br>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-danger btn-lg transition-btn">
+                                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Add this to your custom CSS file or in a <style> tag -->
+<style>
+    /* Form card shadow and hover effect */
+    .card {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button transition on hover */
+    .transition-btn {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .transition-btn:hover {
+        background-color: #c82333; /* Slightly darker red */
+        transform: scale(1.05);
+    }
+
+    /* Optional: Smooth input focus transition */
+    .form-control:focus {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        border-color: #c82333;
+    }
+</style>
+
+{% endblock content %}
+    
