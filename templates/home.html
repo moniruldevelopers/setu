@@ -100,7 +100,7 @@ UGV BLOOD BANK - University Of Global Village Barishal
           </div>
           <div class="news_content">
             <div class="meta d-flex gap-4">
-              <span><i class="fa-regular fa-clock"></i> {{ blog.date }}</span>
+              <span><i class="fa-regular fa-clock"></i> {{ blog.published_at }}</span>
               <span><i class="fa-solid fa-tag"></i> {{ blog.category.name }}</span>
             </div>
             <a href="{% url 'blog_detail' blog.id %}">

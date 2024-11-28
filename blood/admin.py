@@ -5,6 +5,8 @@ from django.utils.html import format_html
 
 from .models import *
 
+
+
 # Register your models here.
 from django.utils.html import mark_safe
 
@@ -130,3 +132,6 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 # Register the TeamMember model with the custom admin settings
 admin.site.register(TeamMember, TeamMemberAdmin)
+
+
+
