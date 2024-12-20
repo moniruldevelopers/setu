@@ -6,6 +6,37 @@ Contact Page
     
 {% block content %}
     
+<!-- Add this to your custom CSS file or in a <style> tag -->
+    <style>
+        /* Form card shadow and hover effect */
+        .card {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        /* Button transition on hover */
+        .transition-btn {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+    
+        .transition-btn:hover {
+            background-color: #c82333; /* Slightly darker red */
+            transform: scale(1.05);
+        }
+    
+        /* Optional: Smooth input focus transition */
+        .form-control:focus {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-color: #c82333;
+        }
+    </style>
+    
+
+
 <section class="contact-section py-1">
     <div class="container">
         <h2 class="text-center mb-2">Contact Us</h2>
@@ -41,34 +72,23 @@ Contact Page
         </div>
     </div>
 </section>
-<!-- Add this to your custom CSS file or in a <style> tag -->
-<style>
-    /* Form card shadow and hover effect */
-    .card {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
 
-    /* Button transition on hover */
-    .transition-btn {
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
+<div class="container">
+    <h3 class="mt-2 mb-2">Find Us on Google Map</h3>
+    <div class="map-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.5940421985374!2d90.34964052590551!3d22.706151478061166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755342394b62973%3A0x17e6bd03d1efe7f9!2sUniversity%20of%20Global%20Village!5e0!3m2!1sen!2sbd!4v1734702399971!5m2!1sen!2sbd" 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
 
-    .transition-btn:hover {
-        background-color: #c82333; /* Slightly darker red */
-        transform: scale(1.05);
-    }
 
-    /* Optional: Smooth input focus transition */
-    .form-control:focus {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        border-color: #c82333;
-    }
-</style>
+
+
 
 {% endblock content %}
     
